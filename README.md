@@ -108,8 +108,8 @@ Aqui estão exemplos de entradas para algumas das rotas principais:
 ```json
 {
   "nome": "Farinha de Trigo",
-  "quantidade": 10,
-  "custo_total": 50.00,
+  "quantidade": 1,
+  "custo_total": 6.99,
   "unidade_id": 1,
 }
 ```
@@ -118,9 +118,9 @@ Aqui estão exemplos de entradas para algumas das rotas principais:
 
 ```json
 {
-  "nome": "Farinha de Trigo Integral",
-  "quantidade": 8,
-  "custo_total": 40.00,
+  "nome": "Acucar",
+  "quantidade": 1,
+  "custo_total": 4.99,
   "unidade_id": 1,
 }
 ```
@@ -135,7 +135,7 @@ Aqui estão exemplos de entradas para algumas das rotas principais:
 
 ## Observações Importantes
 
-- O backend deve estar sendo executado em conjunto com o frontend para proporcionar toda a funcionalidade do sistema.
+- O backend deve estar sendo executado em conjunto com o [frontend](https://github.com/adseawright/mvp-full-stack-basico-frontend) para proporcionar toda a funcionalidade do sistema.
 - **CORS** foi configurado para permitir acesso de diferentes origens, facilitando a integração com o frontend.
 - Certifique-se de que o banco de dados (`db.sqlite3`) está na pasta correta (`database/`) para evitar problemas de conexão.
 
