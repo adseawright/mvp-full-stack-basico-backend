@@ -1,0 +1,248 @@
+swagger: '2.0'
+info:
+  title: API JrMarket
+  version: "1.1"
+  description: API para gerenciar materiais no sistema JrMarket, incluindo cadastro, listagem, atualização e exclusão.
+
+paths:
+  /cadastrar_material:
+    post:
+      summary: Cadastra um novo material.
+      description: Este endpoint permite cadastrar um novo material na base de dados.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: material
+          description: Informações do material a ser cadastrado.
+          required: true
+          schema:
+            type: object
+            required:
+              - nome
+              - quantidade
+              - custo_total
+              - unidade_id
+            properties:
+              nome:
+                type: string
+                description: Nome do material.
+                example: "Papel"
+              quantidade:
+                type: integer
+                description: Quantidade do material.
+                example: 20
+              custo_total:
+                type: number
+                format: float
+                description: Custo total do material.
+                example: 35.75
+              unidade_id:
+                type: integer
+                description: ID da unidade de medida.
+                example: 1
+      responses:
+        201:
+          description: Material cadastrado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Material cadastrado com sucesso!"
+        400:
+          description: Erro ao cadastrar material. Nome já cadastrado ou campos obrigatórios ausentes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Material com o mesmo nome já cadastrado."
+        500:
+          description: Erro interno do servidor ao cadastrar material.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Erro ao cadastrar material."
+
+  /listar_materiais:
+    get:
+      summary: Lista todos os materiais.
+      description: Este endpoint retorna todos os materiais cadastrados na base de dados.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Lista de materiais.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: ID do material.
+                      example: 1
+                    nome:
+                      type: string
+                      description: Nome do material.
+                      example: "Papel"
+                    quantidade:
+                      type: integer
+                      description: Quantidade do material.
+                      example: 20
+                    custo_total:
+                      type: number
+                      format: float
+                      description: Custo total do material.
+                      example: 35.75
+                    unidade:
+                      type: string
+                      description: Unidade de medida.
+                      example: "kg"
+        500:
+          description: Erro interno do servidor ao listar materiais.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Erro ao listar materiais."
+
+  /atualizar_material/{id}:
+    put:
+      summary: Atualiza um material por ID.
+      description: Este endpoint permite atualizar as informações de um material específico usando seu ID.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: ID do material a ser atualizado.
+          example: 1
+        - in: body
+          name: material
+          description: Informações do material a ser atualizado.
+          required: true
+          schema:
+            type: object
+            properties:
+              nome:
+                type: string
+                description: Nome do material.
+                example: "Papel"
+              quantidade:
+                type: integer
+                description: Quantidade do material.
+                example: 25
+              custo_total:
+                type: number
+                format: float
+                description: Custo total do material.
+                example: 50.75
+              unidade_id:
+                type: integer
+                description: ID da unidade de medida.
+                example: 2
+      responses:
+        200:
+          description: Material atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Material atualizado com sucesso!"
+        400:
+          description: Erro ao atualizar material. Campos obrigatórios ausentes ou inválidos.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Erro de integridade ao atualizar material."
+        404:
+          description: Material não encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Material não encontrado."
+        500:
+          description: Erro interno do servidor ao atualizar material.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Erro ao atualizar material."
+
+  /deletar_material/{id}:
+    delete:
+      summary: Deleta um material por ID.
+      description: Este endpoint permite a remoção de um material específico da base de dados usando seu ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: ID do material a ser deletado.
+          example: 1
+      responses:
+        200:
+          description: Material deletado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Material deletado com sucesso!"
+        404:
+          description: Material não encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Material não encontrado."
+        500:
+          description: Erro interno do servidor ao deletar material.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Erro ao deletar material."
